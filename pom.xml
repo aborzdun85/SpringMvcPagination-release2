@@ -4,7 +4,7 @@
 	<groupId>com.spring.mvc</groupId>
 	<artifactId>SpringMvcPagination</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<name>SpringMvcPagination Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
@@ -38,7 +38,32 @@
 			<version>1.2</version>
 		</dependency>
 	</dependencies>
+
 	<build>
 		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>6.3.3</version>
+				<configuration>
+					<url>jdbc:mysql://192.168.56.103:3306/company</url>
+					<user>root</user>
+					<password>supersecret</password>
+					<schemas>
+					<schema>company</schema>
+					<schema>information_schema</schema>
+					<schema>mysql</schema>
+					<schema>performance_schema</schema>
+					<schema>sys</schema>
+					</schemas>
+					<locations>
+						<location>filesystem:target/classes/sql/migrations</location>
+					</locations>
+				</configuration>
+			</plugin>
+		</plugins>
+
 	</build>
+
 </project>
